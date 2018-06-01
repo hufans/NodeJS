@@ -11,6 +11,9 @@ const crypto = require('crypto');
 const hash = crypto.createHash('sha256');
 var app = express();
 
+var http = require('http').Server(app);
+var io = require('socket.io')(http)
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -67,6 +70,16 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+io.on('connection', function(socket){
+    socket.on('chat message', function(msg){
+      console.log('message: ' + msg);
+    });
+  });
+
+  http.listen(3000, function(){
+    console.log('listening on *:3000');
+  });
 
 //函数使用
 function showpage(req,res,data){  

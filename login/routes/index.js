@@ -12,6 +12,7 @@ var router = express.Router();
 
 
 router.get('/', function(req, response, next) {
-  response.sendFile(__dirname + '/../views/chat.html');
+  // var path = __dirname+'/../views/chat.html';
+  response.sendFile("/Users/jxh/Documents/login/login/views/chat.html");
 });
 module.exports = router;
