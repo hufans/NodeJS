@@ -44,6 +44,7 @@ app.use("/dologin",function (request,res,data){
         deal(request,res,data)
 });
 
+app.use("/chat",indexRouter)
 app.use('/modify',function(req,res,data){  
     var mysql = require('./mysql/sql'); 
     var id = req.url; 
@@ -77,8 +78,8 @@ io.on('connection', function(socket){
     });
   });
 
-  http.listen(3000, function(){
-    console.log('listening on *:3000');
+  http.listen(4000, function(){
+    console.log('listening on *:4000');
   });
 
 //函数使用

@@ -10,5 +10,8 @@ router.get('/', function(req,res){
        res.write(str); 
        res.end();   
 });
-
+router.get('chat', function(req, response, next) {
+    // var path = __dirname+'/../views/chat.html';
+    response.sendFile("/Users/jxh/Documents/login/login/views/chat.html");
+  });
 module.exports = router;
