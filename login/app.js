@@ -35,7 +35,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/login",loginRouter);
 app.use("/dologin",function (request,res,data){
-        var a="";  
+        var a = "";  
         request.setEncoding("utf8");   
         var x = request.body
         deal(request,res,data)
