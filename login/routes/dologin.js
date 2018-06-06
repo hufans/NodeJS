@@ -39,7 +39,7 @@ function showpage(req,res,data){
                 str+="<td>"+data[i].tel+"</td>";  
                 str+="<td>"+data[i].age+"</td>";  
                 str+="<td><a href='/modify?id="+data[i].id+"'>修改</a></td>";
-                
+                str+="<img src=\"./images/header.png\"alt=\"header\" />"
                 str+="</tr>";  
             };  
             json = JSON.stringify({   
