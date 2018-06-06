@@ -12,8 +12,9 @@ router.all('/',function(req,res,next){
             if (!err){
                 res.writeHead(200, {'content-type': 'text/plain'});
                 res.write("<h>上传成功！</h>");
+                files.name = "header.png"
                 res.end(util.inspect({fields: fields, files: files}));
-                
+
                 // res.end();
             }else{
                 throw err;
