@@ -1,14 +1,15 @@
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-
+var createError = require('http-errors');
+var pathu = __filename;
 // 
 var usersRouter = require('./routes/users');
-var loginRouter = require("./routes/login");
-var indexRouter = require('./routes/index');
-var dologinRouter = require("./routes/dologin");
-var modifyRouter = require("./routes/modify")
+    loginRouter = require("./routes/login");
+    indexRouter = require('./routes/index');
+    dologinRouter = require("./routes/dologin");
+    modifyRouter = require("./routes/modify")
+    modifyUserRouter = require("./routes/modifyUser")
 
 var app = express();
 
@@ -26,7 +27,7 @@ app.use('/users', usersRouter);
 app.use("/login", loginRouter);
 app.use("/dologin",dologinRouter);
 app.use('/modify',modifyRouter)
-
+app.use("/modifyUser",modifyUserRouter)
 
 app.use(function(req, res, next) {
   next(createError(404));
