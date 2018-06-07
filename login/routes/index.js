@@ -12,5 +12,6 @@ router.post("/",function(req,res){
     str="<h1>欢迎</h1><a href='/login'>点我登录</a>";  
     res.write(str);   
     res.end();  
-})
+});
+
 module.exports = router;

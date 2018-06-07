@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req,res){  
+router.use('/', function(req,res){  
     res.writeHead(200,{'Content-type':'text/html;charset=utf-8'});  
         var str = "<form action='/dologin' method='post'>"+  
          "帐号:<input type ='text' name='name'><br/><br/>"+  

@@ -25,9 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/", indexRouter);
 app.use('/users', usersRouter);
 app.use("/login", loginRouter);
-app.use("/dologin",dologinRouter);
-app.use('/modify',modifyRouter)
-app.use("/modifyUser",modifyUserRouter)
+app.use("/dologin", dologinRouter);
+app.use('/modify', modifyRouter)
+app.use("/modifyUser", modifyUserRouter)
 
 app.use(function(req, res, next) {
   next(createError(404));

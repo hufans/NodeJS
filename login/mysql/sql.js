@@ -9,12 +9,12 @@ var connection  = mysql.createConnection({
  });  
  connection.connect();  
    
- //查询数据  
+ //查询数据  //modify data
  function query(sql,callback){  
          connection.query(sql, function(err, rows, fields) {  
              if (err) throw err;  
               callback(rows);  
        });  
      //connection.end();  
- }  
+ }
  exports.query = query; 
