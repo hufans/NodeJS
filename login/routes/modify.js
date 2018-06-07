@@ -16,10 +16,6 @@ function modifyview(req,res,data){
     
     var str = "<img src=\"./images/header.png\"alt=\"header\" />";
     str +='<form action="/modifyUser/header" enctype="multipart/form-data" method="post">'+
-        // '账号<input type="text" value = '+data[0].name+'><br>'+
-        // '密码<input type="text" value = '+data[0].password+'><br>'+
-        // '年龄<input type="text" value = '+data[0].age+'><br>'+
-        // '电话<input type="text" value = '+data[0].tel+'><br>'+
         '<input type="file" name="upload" multiple="multiple"><br>'+     
         '<input type="submit" value="上传">'+
     '</form><br/>'
@@ -31,6 +27,6 @@ function modifyview(req,res,data){
         " <input type ='submit' value='修改'></form>";  
 
    res.write(str); 
-   res.end();   
+   res.end(); 
 }  
 module.exports = router;

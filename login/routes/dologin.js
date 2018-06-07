@@ -8,27 +8,32 @@ router.post('/', function(req,res,data){
     var a = "";  
     req.setEncoding("utf8");   
     var x = req.body
-    deal(req,res,data)
+    //judge cookies
+    if(req.cookies.user){
+        //already login
+        deal(req,res,data,true)
+      }else{
+        deal(req,res,data,false)
+      }
 });
 
 function deal(req,res,data){
+
     var pass = req.body;
-     
     var name = pass.name;  
     var password = pass.password;  
     var sql = "SELECT * FROM t_user WHERE name = '"+name+"' AND password = '"+password+"'";  
-    mysql.query(sql,function(data){  
-        showpage(req,res,data);  
+    mysql.query(sql,function(data){
+        showpage(req,res,data);
     }); 
 }
 //函数使用
 function showpage(req,res,data){  
+    res.cookie("user",data[0].name)
     res.writeHead(200,{'Content-type':'text/html;charset=utf-8'});  
-    var json = "";
     if(data != ''){ //data[0].name+data[0].password
-        // hash.update("hufan"); 
-        // var token = hash.digest('hex')
-        var str = "<h1>登录成功</h1>";  
+        //login success 
+        var str = "<h1>你好啊</h1>";  
             str+="帐号:"+data[0].name+"<br>";  
             str+="密码:"+data[0].password;  
             str+="<table border='1' width='400px'>";  
@@ -42,16 +47,14 @@ function showpage(req,res,data){
                 str+="<img src=\"./images/header.png\"alt=\"header\" />"
                 str+="</tr>";  
             };  
-            json = JSON.stringify({   
-                // token 
-              }); 
             str+="</tr></table>";  
+           
     }else{  
 
         var str = "<h1>登录失败</h1>";  
             str+="<a href='/login'>返回登录</a>";  
     };
-    res.write(str);   
+    res.write(str);  
     res.end();   
 }  
 module.exports = router;
