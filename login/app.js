@@ -1,9 +1,7 @@
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
-// var cookieSession = require("cookie-session")
+var session = require('express-session')
 var createError = require('http-errors');
-var pathu = __filename;
 // 
 var usersRouter = require('./routes/users');
     loginRouter = require("./routes/login");
@@ -11,7 +9,7 @@ var usersRouter = require('./routes/users');
     dologinRouter = require("./routes/dologin");
     modifyRouter = require("./routes/modify");
     modifyUserRouter = require("./routes/modifyUser");
-    cookiesRouter = require("./routes/cookiesRouter")
+    auth = require("./routes/auth")
 
 var app = express();
 
@@ -19,26 +17,31 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-var cookieKey = "default"
-//use middleware
+var sessionObj = {
+  secret: "cat",
+  resave: false,
+  saveUninitialized: true
+}
+app.use(session(sessionObj));
+
+// use middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser(cookieKey));
-// app.use(cookieSession({name:'session',keys:[3456],maxAge:100}))
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cookiesRouter)
+
+app.use(auth)
 app.use("/", indexRouter);
-app.use('/users', usersRouter);
+app.use("/users", usersRouter);
 app.use("/login", loginRouter);
 app.use("/dologin", dologinRouter);
-app.use('/modify', modifyRouter)
-app.use("/modifyUser", modifyUserRouter)
+app.use("/modify", modifyRouter);
+app.use("/modifyUser", modifyUserRouter);
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
