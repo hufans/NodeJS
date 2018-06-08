@@ -9,7 +9,7 @@ router.get('/', function(req,res,data){
     }) 
 });
 function modifyview(req,res,data){ 
-    
+
     req.session.userData = {};
     req.session.userData.login = true;
     req.session.userData.userName = data[0].name;
@@ -19,7 +19,7 @@ function modifyview(req,res,data){
 
     res.writeHead(200,{'Content-type':'text/html;charset=utf-8'}); 
     //upload header img 
-    var str = "<img src=\"./images/header.png\"alt=\"header\" />";
+    var str = "<img src=\"/static/images/header.png\"alt=\"header\" />";
     str +='<form action="/modifyUser/header" enctype="multipart/form-data" method="post">'+
         '<input type="file" name="upload" multiple="multiple"><br>'+     
         '<input type="submit" value="上传">'+
