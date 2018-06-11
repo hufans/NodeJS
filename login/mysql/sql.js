@@ -11,10 +11,9 @@ var connection  = mysql.createConnection({
    
  //查询数据  //modify data
  function query(sql,callback){  
-         connection.query(sql, function(err, rows, fields) {  
-             if (err) throw err;  
-              callback(rows);  
-       });  
+        connection.query(sql, function(err, rows, fields) {   
+            callback(err, rows);  
+        });  
      //connection.end();  
  }
  exports.query = query; 

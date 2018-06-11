@@ -2,9 +2,12 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('./../mysql/sql'); 
 
-router.get('/', function(req,res,data){    
-    var sql = "SELECT * FROM t_user WHERE id = '"+req.query.id+"'";  
-    mysql.query(sql,function(dataR){  
+router.get('/', function(req,res,data){
+
+    var sql = "SELECT * FROM t_user WHERE id = '"+req.session.user.id+"';";  
+    console.log(sql)
+    mysql.query(sql,function(err, dataR){  
+        console.log(dataR)
         modifyview(req,res,dataR);  
     }) 
 });
