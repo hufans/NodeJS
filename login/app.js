@@ -3,13 +3,12 @@ var path = require('path');
 var session = require('express-session')
 var createError = require('http-errors');
 // 
+var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-    loginRouter = require("./routes/login");
-    indexRouter = require('./routes/index');
-    dologinRouter = require("./routes/dologin");
-    modifyRouter = require("./routes/modify");
-    modifyUserRouter = require("./routes/modifyUser");
-    auth = require("./routes/auth")
+var loginRouter = require("./routes/login");
+var profileRouter = require('./routes/profile');
+var modifyRouter = require("./routes/modify");
+var modifyUserRouter = require("./routes/modifyUser");
 
 var app = express();
 
@@ -27,15 +26,22 @@ app.use(session(sessionObj));
 // use middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/static",express.static(path.join(__dirname, 'public')));
+app.use("/static", express.static(path.join(__dirname, 'public')));
 
-app.use(auth)
+function authenticate(req,res,next){
+  // 如果未从 session 中获取到用户数据， 则判此次请求为一次异常请求。
+  if (!req.session.user) {
+    return res.redirect('/login');
+  }
+  next();
+}
+
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("/login", loginRouter);
-app.use("/dologin", dologinRouter);
-app.use("/modify", modifyRouter);
-app.use("/modifyUser", modifyUserRouter);
+app.use("/profile", authenticate, profileRouter);
+app.use("/users", authenticate, usersRouter);
+app.use("/modify", authenticate, modifyRouter);
+app.use("/modifyUser", authenticate, modifyUserRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));
