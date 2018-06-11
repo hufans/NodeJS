@@ -7,7 +7,7 @@ router.get('/', function (req, res) {
   res.end();
 });
 
-function getLoginTemplate(){
+function getLoginTemplate() {
   return `
     <div>
       <h1>欢迎</h1>
