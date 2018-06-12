@@ -4,7 +4,6 @@ var session = require('express-session')
 var createError = require('http-errors');
 
 var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
 var loginRouter = require("./routes/login");
 var profileRouter = require('./routes/profile');
 var modifyRouter = require("./routes/modify");
@@ -14,7 +13,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
+app.set()
 var sessionObj = {
   secret: "cat",
   resave: false,
@@ -30,20 +29,22 @@ app.use("/static", express.static(path.join(__dirname, 'public')));
 
 function authenticate(req, res, next) {
   // 如果未从 session 中获取到用户数据， 则判此次请求为一次异常请求。
-  if ( !req.session.user ) {
+  if (!req.session.user) {
     return res.redirect('/login');
   }
   next();
 }
 
 //检查是不是小图标请求。
-function checkIsUseableRequest(req,res){
-  if( req.url == "/favicon.ico" ){  
-    return;  
-  } 
+function checkIsUseableRequest(req, res, next) {
+  if (req.url == "/favicon.ico") {
+      return;
+  } else {
+      next();
+  }
 }
 
-// app.use(checkIsUseableRequest);
+app.use(checkIsUseableRequest);
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/profile", authenticate, profileRouter);

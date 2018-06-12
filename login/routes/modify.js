@@ -36,7 +36,7 @@ router.post("/msg", function (req, res, next) {
 
     //此处客户端需要验证参数是否有效。服务端辅助验证
     if (!receive_clientData.password || !receive_clientData.tel || !receive_clientData.age || !userData_baseSession.id) {
-        next(new Error('params should`t be empty'))
+        next()//new Error('params shouldn`t be empty')
     } else {
         var sql = "UPDATE t_user set PASSWORD = '" + receive_clientData.password + "',tel = " + receive_clientData.tel + ", age = " + receive_clientData.age + " WHERE id = " + userData_baseSession.id;
         mysql.query(sql, function (err, sqlCallBackData) {

@@ -62,4 +62,12 @@ template.getModifyPageTemplate = function(userData) {
   `;
 }
 
+template.getLoginTemplate = function() {
+    return `
+      <div>
+        <h1>欢迎</h1>
+        <a href='/login'>点我登录</a>
+      </div>
+    `;
+  }
 module.exports = template;
