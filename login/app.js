@@ -2,13 +2,12 @@ var express = require('express');
 var path = require('path');
 var session = require('express-session')
 var createError = require('http-errors');
-// 
+
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// var usersRouter = require('./routes/users');
 var loginRouter = require("./routes/login");
 var profileRouter = require('./routes/profile');
 var modifyRouter = require("./routes/modify");
-var modifyUserRouter = require("./routes/modifyUser");
 
 var app = express();
 
@@ -21,6 +20,7 @@ var sessionObj = {
   resave: false,
   saveUninitialized: true
 }
+
 app.use(session(sessionObj));
 
 // use middleware
@@ -28,20 +28,26 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/static", express.static(path.join(__dirname, 'public')));
 
-function authenticate(req,res,next){
+function authenticate(req, res, next) {
   // 如果未从 session 中获取到用户数据， 则判此次请求为一次异常请求。
-  if (!req.session.user) {
+  if ( !req.session.user ) {
     return res.redirect('/login');
   }
   next();
 }
 
+//检查是不是小图标请求。
+function checkIsUseableRequest(req,res){
+  if( req.url == "/favicon.ico" ){  
+    return;  
+  } 
+}
+
+// app.use(checkIsUseableRequest);
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/profile", authenticate, profileRouter);
-app.use("/users", authenticate, usersRouter);
 app.use("/modify", authenticate, modifyRouter);
-app.use("/modifyUser", authenticate, modifyUserRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));

@@ -43,8 +43,6 @@ function modifyUserHeader(req,res,fields,files){
             });
         }
     });
-    
-    
 }
 function modifyMesg(req,res,next){
     var data = req.body;

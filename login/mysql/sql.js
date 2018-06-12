@@ -3,7 +3,7 @@ var connection  = mysql.createConnection({
   
     host:'localhost',  
     user:'root',//账号  
-    password:'fanhu123',//密码  
+    // password:'fanhu123',//密码  
     database:'mysql' //数据库名字  
    
  });  

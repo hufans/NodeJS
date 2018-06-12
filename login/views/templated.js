@@ -34,6 +34,7 @@ var template = {
 
 //  获取修改模版
 template.getModifyPageTemplate = function(userData) {
+    console.log("开始返回Template数据");
     return `
     <div>
         <img 
@@ -42,14 +43,14 @@ template.getModifyPageTemplate = function(userData) {
             width='64px' 
             height='64px' 
         />
-        <form action="/modifyUser/header" enctype="multipart/form-data" method="post">
+        <form action="/modify/header" enctype="multipart/form-data" method="post">
             <input type="file" name="upload" multiple="multiple"><br>     
             <input type="submit" value="上传">
         </form> 
     </div>
   
     <div>
-      <form action="/modifyUser/msg"  method="post">  
+      <form action="/modify/msg"  method="post">  
         <td>
           密码:<input type ='text' name='password'></br>
           年龄:<input type ='text' name='age' value = ${userData.age}></br>

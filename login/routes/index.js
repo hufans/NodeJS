@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function (req, res) {
-  res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-  res.write(getLoginTemplate());
-  res.end();
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.write(getLoginTemplate());
+    res.end();
 });
 
 function getLoginTemplate() {
