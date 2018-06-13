@@ -25,7 +25,8 @@ var template = {
                         <td>${userData.age}</td>
                         <td><a href='/modify'>修改</a></td>
                     </tr>
-                </table>
+                </table></td>
+                <td><a href='/signout'>登出</a></td>
             </div>
         `;
     }
@@ -34,7 +35,6 @@ var template = {
 
 //  获取修改模版
 template.getModifyPageTemplate = function(userData) {
-    console.log("开始返回Template数据");
     return `
     <div>
         <img 
@@ -70,4 +70,13 @@ template.getLoginTemplate = function() {
       </div>
     `;
   }
+
+template. userNotFoundHtmlTemplate = function() {
+    return `
+        <h1>User Not Found!</h1>
+        <p>
+            <a href='/profile'>Refresh Current Page pls!</a>
+        </p>
+    `
+}
 module.exports = template;

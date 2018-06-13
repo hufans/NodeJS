@@ -29,7 +29,6 @@ function handleUserAuthentication(req, res, next) {
         if (err) {
             return next(err);
         }
-        console.log(data)
         if(data.length !== 1) {
             return renderTemplate(res, failedToLoginHtmlTemplate());
         }

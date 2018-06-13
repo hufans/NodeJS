@@ -7,6 +7,7 @@ var indexRouter = require('./routes/index');
 var loginRouter = require("./routes/login");
 var profileRouter = require('./routes/profile');
 var modifyRouter = require("./routes/modify");
+var signOut = require("./routes/signout");
 
 var app = express();
 
@@ -45,10 +46,11 @@ function checkIsUseableRequest(req, res, next) {
 }
 
 app.use(checkIsUseableRequest);
-app.use("/", indexRouter);
-app.use("/login", loginRouter);
+app.use("/",        indexRouter);
+app.use("/login",   loginRouter);
 app.use("/profile", authenticate, profileRouter);
-app.use("/modify", authenticate, modifyRouter);
+app.use("/modify",  authenticate, modifyRouter);
+app.use("/signout", authenticate,signOut);
 
 app.use(function (req, res, next) {
   next(createError(404));
