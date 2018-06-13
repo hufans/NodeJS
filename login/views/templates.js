@@ -1,15 +1,14 @@
 
 //两周不同的写法
 var template = {
-     userProfileHtmlTemplate : function (userData) {
-        // var userData = templateData.userData;
+     userProfileHtmlTemplate : function (userData,headerPath) {
         return `
             <h1>你好啊</h1>
             <div>
                 <p>Account: ${userData.name}</p>
                 <div>
                     <img 
-                        src=\"/static/images/header.png\"
+                        src=${headerPath}
                         alt=\"header\" 
                         width='64px' 
                         height='64px' 
@@ -34,11 +33,11 @@ var template = {
 
 
 //  获取修改模版
-template.getModifyPageTemplate = function(userData) {
+template.getModifyPageTemplate = function(userData,headerPath) {
     return `
     <div>
         <img 
-            src=\"/static/images/header.png\"
+            src=${headerPath}
             alt=\"header\" 
             width='64px' 
             height='64px' 
@@ -62,7 +61,8 @@ template.getModifyPageTemplate = function(userData) {
   `;
 }
 
-template.getLoginTemplate = function() {
+template
+.getLoginTemplate = function() {
     return `
       <div>
         <h1>欢迎</h1>

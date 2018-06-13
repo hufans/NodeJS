@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require("../mysql/sql")
-var templated = require("../views/templated") 
+var templates = require("../views/templates") 
+var utils_glpbal = require("../bin/util_global")
 
 
 router.get('/', function(req, res, next){
@@ -13,10 +14,11 @@ router.get('/', function(req, res, next){
             return next(err);
         }
         if (results.length !== 1) {
-            return renderTemplate(res, templated.userNotFoundHtmlTemplate());
+            return renderTemplate(res, templates.userNotFoundHtmlTemplate());
         }
         const userData = results[0];
-        renderTemplate(res, templated.userProfileHtmlTemplate(userData));
+        var path = utils_glpbal.getHeaderPath(userData.id)
+        renderTemplate(res, templates.userProfileHtmlTemplate(userData,path));
     });
 });
 

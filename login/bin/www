@@ -7,6 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('login:server');
 var http = require('http');
+require("./util_global");
+
 
 /**
  * Get port from environment and store in Express.
