@@ -3,7 +3,7 @@ var path = require('path');
 var session = require('express-session')
 var createError = require('http-errors');
 
-var indexRouter = require('./routes/index');
+// var indexRouter = require('./routes/login');
 var loginRouter = require("./routes/login");
 var profileRouter = require('./routes/profile');
 var modifyRouter = require("./routes/modify");
@@ -46,7 +46,7 @@ function checkIsUseableRequest(req, res, next) {
 }
 
 app.use(checkIsUseableRequest);
-app.use("/",        indexRouter);
+app.use("/",        loginRouter);
 app.use("/login",   loginRouter);
 app.use("/profile", authenticate, profileRouter);
 app.use("/modify",  authenticate, modifyRouter);
