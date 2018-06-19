@@ -8,6 +8,7 @@ var loginRouter = require("./routes/login");
 var profileRouter = require('./routes/profile');
 var modifyRouter = require("./routes/modify");
 var signOut = require("./routes/signout");
+var productRouter = require("./routes/product");
 
 var app = express();
 
@@ -40,17 +41,24 @@ function authenticate(req, res, next) {
 function checkIsUseableRequest(req, res, next) {
   if (req.url == "/favicon.ico") {
       return;
-  } else {
-      next();
-  }
+  } 
+  next();
 }
 
 app.use(checkIsUseableRequest);
+
 app.use("/",        loginRouter);
 app.use("/login",   loginRouter);
-app.use("/profile", authenticate, profileRouter);
-app.use("/modify",  authenticate, modifyRouter);
-app.use("/signout", authenticate,signOut);
+
+app.use(authenticate);
+app.use("/product", productRouter);
+app.use("/profile", profileRouter);
+app.use("/modify",  modifyRouter);
+app.use("/signout", signOut);
+
+app.use(function (req, res, next) {
+  next(createError(403));
+});
 
 app.use(function (req, res, next) {
   next(createError(404));

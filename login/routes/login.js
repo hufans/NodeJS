@@ -1,12 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('./../mysql/sql');
-var async = require("async")
 
 router.get('/', function(req, res, next){ 
     var user = req.session.user;
     if (user) {
-        res.redirect('/profile');
+        res.redirect('/product');
     } else {
         renderTemplate(res, loginHtmlTemplate());   
     }
@@ -16,7 +15,7 @@ router.post("/",
     handleUserAuthentication,
     handleUserSession,
     function(req, res, next) {
-        res.redirect('/profile');
+        res.redirect('/product');
     }
 )
 
@@ -38,12 +37,14 @@ function handleUserAuthentication(req, res, next) {
 }
 
 function handleUserSession(req, res, next) {
+    console.log("hahaha");
     var userData = req.userData;
     req.session.user = {
         id: userData.id,
         userName: userData.name,
         tel: userData.tel,
         age: userData.age,
+        address:userData.defaultCity,
     }
     next();
 }

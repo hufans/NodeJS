@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var templateView = require("./../views/templates");
+var templateView = require("../views/templates");
 
 router.get('/', function (req, res, next) {
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
